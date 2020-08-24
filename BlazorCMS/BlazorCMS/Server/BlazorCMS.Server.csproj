@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,8 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\BlazorCMS.Web.csproj" />
-    <ProjectReference Include="..\Shared\BlazorCMS.Shared.csproj" />
+    <ProjectReference Include="..\..\BlazorCMS.Core\BlazorCMS.Core.csproj" />
+    <ProjectReference Include="..\..\BlazorCMS.SharedModels\BlazorCMS.SharedModels.csproj" />
+    <ProjectReference Include="..\Web\BlazorCMS.Web.csproj" />
   </ItemGroup>
 
 

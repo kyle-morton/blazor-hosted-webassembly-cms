@@ -1,12 +1,13 @@
 @page "/fetchdata"
-@using BlazorCMS.Shared
+@using BlazorCMS.Shared.Domain
+
 @inject HttpClient Http
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (Blogs == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -15,20 +16,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Id</th>
+                <th>Create Date</th>
+                <th>Name</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var blog in Blogs)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@blog.Id</td>
+                    <td>@blog.CreateDate.ToShortDateString()</td>
+                    <td>@blog.Name</td>
+                    <td>@blog.Description</td>
                 </tr>
             }
         </tbody>
@@ -36,11 +37,11 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private List<Blog> Blogs;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        Blogs = await Http.GetFromJsonAsync<List<Blog>>("Blog");
     }
 
 }
