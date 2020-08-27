@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCMS.Server", "BlazorC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCMS.Web", "BlazorCMS\Web\BlazorCMS.Web.csproj", "{2D102089-B08D-4426-8BFA-C213EB04CC50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCMS.Core", "BlazorCMS.Core\BlazorCMS.Core.csproj", "{82B3AF60-92B2-40D7-B11F-ED662834BE85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCMS.Core", "BlazorCMS.Core\BlazorCMS.Core.csproj", "{82B3AF60-92B2-40D7-B11F-ED662834BE85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCMS.SharedModels", "BlazorCMS.SharedModels\BlazorCMS.SharedModels.csproj", "{2DE080D3-A354-4D9E-9322-D4D415DC7EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCMS.SharedModels", "BlazorCMS.SharedModels\BlazorCMS.SharedModels.csproj", "{2DE080D3-A354-4D9E-9322-D4D415DC7EE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F5D74C9-AE8E-4BAA-9C02-72F057176C6E}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

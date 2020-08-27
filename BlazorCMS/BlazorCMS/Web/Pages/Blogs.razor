@@ -1,7 +1,5 @@
-@page "/fetchdata"
-@using BlazorCMS.Shared.Domain
-
-@inject HttpClient Http
+﻿@page "/blogs"
+@inherits BlogsBase
 
 <h1>Weather forecast</h1>
 
@@ -34,14 +32,4 @@ else
             }
         </tbody>
     </table>
-}
-
-@code {
-    private List<Blog> Blogs;
-
-    protected override async Task OnInitializedAsync()
-    {
-        Blogs = await Http.GetFromJsonAsync<List<Blog>>("Blog");
-    }
-
 }
