@@ -1,0 +1,36 @@
+﻿@inherits BlogListBase
+
+@if (Blogs == null)
+{
+    <p><em>Loading Blogs...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Create Date</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blog in Blogs)
+            {
+                <tr >
+                    <td>@blog.Id</td>
+                    <td>@blog.CreateDate.ToShortDateString()</td>
+                    <td>@blog.Name</td>
+                    <td>@blog.Description</td>
+                    <td>
+                        <a href="@($"/blogs/{blog.Id}/posts")">
+                            Posts
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

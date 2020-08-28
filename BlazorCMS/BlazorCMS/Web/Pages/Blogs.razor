@@ -1,35 +1,4 @@
 ﻿@page "/blogs"
 @inherits BlogsBase
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-@if (Blogs == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Create Date</th>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var blog in Blogs)
-            {
-                <tr>
-                    <td>@blog.Id</td>
-                    <td>@blog.CreateDate.ToShortDateString()</td>
-                    <td>@blog.Name</td>
-                    <td>@blog.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<BlogList></BlogList>

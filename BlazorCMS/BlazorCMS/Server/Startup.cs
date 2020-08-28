@@ -26,6 +26,7 @@ namespace BlazorCMS.Server
             services.AddRazorPages();
 
             services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IBlogPostService, BlogPostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

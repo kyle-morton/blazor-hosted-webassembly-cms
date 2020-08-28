@@ -14,5 +14,6 @@ namespace BlazorCMS.Core.Services
         {
             return MockDataContext.Blogs;
         }
+
     }
 }
