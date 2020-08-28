@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Pages
@@ -25,10 +24,6 @@ namespace BlazorCMS.Web.Pages
             if (BlogId == 0)
             {
                 NavigationManager.NavigateTo("/blogs");
-            }
-            else
-            {
-                Posts = await Http.GetFromJsonAsync<List<BlogPost>>($"BlogPost");
             }
         }
     }

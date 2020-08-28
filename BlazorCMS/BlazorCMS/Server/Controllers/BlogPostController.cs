@@ -31,7 +31,7 @@ namespace BlazorCMS.Server.Controllers
         }
 
         [HttpGet]
-        [Route("/{blogId}")]
+        [Route("ByBlog/{blogId}")]
         public List<BlogPost> GetAll(int blogId)
         {
             var results = _blogPostService.GetBlogPosts(blogId);

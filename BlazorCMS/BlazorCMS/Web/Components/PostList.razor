@@ -1,7 +1,34 @@
 ﻿@inherits PostListBase
 
-<h3>PostList</h3>
-
-@code {
-
+@if (Posts == null)
+{
+    <p><em>Loading Posts...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Create Date</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Posts)
+            {
+                <tr>
+                    <td>@post.Id</td>
+                    <td>@post.CreateDate.ToShortDateString()</td>
+                    <td>@post.Title</td>
+                    <td>
+                        <a>
+                            View
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

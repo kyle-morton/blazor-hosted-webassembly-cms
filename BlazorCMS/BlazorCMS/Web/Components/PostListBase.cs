@@ -1,9 +1,25 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorCMS.Shared.Domain;
+using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Components
 {
     public class PostListBase : ComponentBase
     {
-        
+        [Parameter]
+        public int BlogId { get; set; }
+
+        [Inject]
+        protected HttpClient Http { get; set; }
+
+        protected List<BlogPost> Posts { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            Posts = await Http.GetFromJsonAsync<List<BlogPost>>($"BlogPost/ByBlog/{BlogId}");
+        }
     }
 }
