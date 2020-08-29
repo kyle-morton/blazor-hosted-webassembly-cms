@@ -1,9 +1,13 @@
 ﻿@page "/blogs/{blogId:int}/posts"
 @inherits BlogPostsBase
 
-Blog Posts
-
 @if(BlogId > 0)
 {
-    <PostList BlogId="BlogId"></PostList>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Posts</h5>
+        <PostList BlogId="BlogId"></PostList>
+    </div>
+</div>
+
 }
