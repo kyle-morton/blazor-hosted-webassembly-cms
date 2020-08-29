@@ -33,7 +33,7 @@ namespace BlazorCMS.Web.Pages.Blogs
 
         protected async Task Delete()
         {
-            var result = await Http.PostAsync($"Blogs/Delete/{Id}", null);
+            var result = await Http.DeleteAsync($"Blogs/Delete/{Id}");
             if (result.IsSuccessStatusCode)
             {
                 NavigationManager.NavigateTo("/Blogs");

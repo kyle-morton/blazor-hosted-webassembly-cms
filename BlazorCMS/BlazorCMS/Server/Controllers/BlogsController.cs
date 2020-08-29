@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace BlazorCMS.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
@@ -63,8 +63,8 @@ namespace BlazorCMS.Server.Controllers
             return Ok(BlogViewModel.From(blog));
         }
 
-        [HttpPost]
-        [Route("Delete")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             if (id == 0)

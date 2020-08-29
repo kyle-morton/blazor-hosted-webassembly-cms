@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BlazorCMS.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BlogPostsController : ControllerBase
     {

@@ -9,7 +9,11 @@ else
 {
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Blog Details @Blog.Id</h4>
+            <h4 class="card-title">Blog @Blog.Name</h4>
+            <h5>@Blog.Description</h5>
+            <span class="small">Created at @Blog.CreateDateHumanized</span>
+            <span class="small">Modified at @Blog.ModifyDateHumanized</span>
         </div>
     </div>
+    <a @onclick="Delete" class="btn btn-danger mt-3">Delete Blog</a>
 }

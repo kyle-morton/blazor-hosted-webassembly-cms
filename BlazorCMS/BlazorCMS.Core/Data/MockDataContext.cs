@@ -12,8 +12,8 @@ namespace BlazorCMS.Core.Data
         public static List<User> Users { get; set; }
         public static List<Person> People { get; set; }
 
-        public static int NewBlogId => Blogs.Max(b => b.Id) + 1;
-        public static int NewPostId => BlogPosts.Max(bp => bp.Id) + 1;
+        public static int NewBlogId => Blogs.Count > 0 ? Blogs.Max(b => b.Id) + 1 : 1;
+        public static int NewPostId => BlogPosts.Count > 0 ? BlogPosts.Max(bp => bp.Id) + 1 : 1;
 
         public static void Init()
         {
