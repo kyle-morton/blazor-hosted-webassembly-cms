@@ -1,4 +1,4 @@
-﻿using BlazorCMS.Shared.Domain;
+﻿using BlazorCMS.SharedModels.ViewModels.Blogs;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -18,11 +18,11 @@ namespace BlazorCMS.Web.Components
         [Inject]
         protected HttpClient Http { get; set; }
 
-        protected List<Blog> Blogs;
+        protected List<BlogViewModel> Blogs;
 
         protected override async Task OnInitializedAsync()
         {
-            Blogs = await Http.GetFromJsonAsync<List<Blog>>("Blog");
+            Blogs = await Http.GetFromJsonAsync<List<BlogViewModel>>("Blog");
         }
     }
 }

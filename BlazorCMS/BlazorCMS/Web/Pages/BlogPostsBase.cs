@@ -1,6 +1,4 @@
-﻿using BlazorCMS.Shared.Domain;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -16,8 +14,6 @@ namespace BlazorCMS.Web.Pages
 
         [Parameter]
         public int BlogId { get; set; }
-
-        protected List<BlogPost> Posts { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

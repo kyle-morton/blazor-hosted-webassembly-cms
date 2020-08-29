@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BlazorCMS.Core.Services;
-using BlazorCMS.Shared.Domain;
-using Microsoft.AspNetCore.Http;
+﻿using BlazorCMS.Core.Services;
+using BlazorCMS.SharedModels.ViewModels.BlogPosts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace BlazorCMS.Server.Controllers
 {
@@ -29,7 +25,7 @@ namespace BlazorCMS.Server.Controllers
         public IActionResult Recent()
         {
             var recents = _blogPostService.GetPosts().OrderByDescending(c => c.CreateDate).Take(5);
-            return Ok(recents);
+            return Ok(recents.Select(bp => BlogPostViewModel.From(bp)));
         }
 
         [HttpGet]
@@ -37,7 +33,8 @@ namespace BlazorCMS.Server.Controllers
         public IActionResult GetAll(int blogId)
         {
             var results = _blogPostService.GetBlogPosts(blogId);
-            return Ok(results);
+
+            return Ok(results.Select(BlogPostViewModel.From));
         }
 
         [HttpGet]
@@ -45,7 +42,19 @@ namespace BlazorCMS.Server.Controllers
         public IActionResult Details(int id)
         {
             var result = _blogPostService.GetPost(id);
-            return Ok(result);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(BlogPostViewModel.From(result));
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(CreateBlogPostViewModel vm)
+        {
+            return Ok();
         }
     }
 }

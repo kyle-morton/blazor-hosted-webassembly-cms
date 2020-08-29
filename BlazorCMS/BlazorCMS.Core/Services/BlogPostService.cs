@@ -38,7 +38,6 @@ namespace BlazorCMS.Core.Services
         public BlogPost Create(BlogPost post)
         {
             post.Id = MockDataContext.NewPostId;
-            post.CreateDate = post.ModifyDate = DateTime.Now;
             MockDataContext.BlogPosts.Add(post);
             return post;
         }
@@ -51,6 +50,7 @@ namespace BlazorCMS.Core.Services
                 return post;
             }
 
+            postToUpdate.ModifyDate = DateTime.Now;
             postToUpdate.Title = post.Title;
             postToUpdate.Content = post.Content;
 

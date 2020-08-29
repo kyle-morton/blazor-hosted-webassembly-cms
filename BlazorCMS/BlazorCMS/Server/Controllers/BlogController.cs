@@ -1,7 +1,10 @@
 ﻿using BlazorCMS.Core.Services;
 using BlazorCMS.Shared.Domain;
+using BlazorCMS.SharedModels.ViewModels.Blogs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BlazorCMS.Server.Controllers
 {
@@ -22,8 +25,8 @@ namespace BlazorCMS.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var results = _blogService.GetBlogs();
-            return Ok(results);
+            List<Blog> results = _blogService.GetBlogs();
+            return Ok(results.Select(BlogViewModel.From));
         }
 
         [HttpGet]
@@ -31,23 +34,23 @@ namespace BlazorCMS.Server.Controllers
         public IActionResult Details(int id)
         {
             var result = _blogService.GetBlog(id);
-            return Ok(result);
+            return Ok(BlogViewModel.From(result));
         }
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult Create(Blog blog)
+        public IActionResult Create(CreateBlogViewModel vm)
         {
-            blog = _blogService.Create(blog);
-            return Ok(blog);
+            var blog = _blogService.Create(vm.ToModel());
+            return Ok(BlogViewModel.From(blog));
         }
 
         [HttpPost]
         [Route("Update")]
-        public IActionResult Update(Blog blog)
+        public IActionResult Update(UpdateBlogViewModel vm)
         {
-            blog = _blogService.Update(blog);
-            return Ok(blog);
+            var blog = _blogService.Update(vm.ToModel());
+            return Ok(BlogViewModel.From(blog));
         }
 
         [HttpPost]
