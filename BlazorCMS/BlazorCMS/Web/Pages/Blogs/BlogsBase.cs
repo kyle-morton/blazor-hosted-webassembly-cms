@@ -6,12 +6,5 @@ namespace BlazorCMS.Web.Pages
 {
     public class BlogsBase : ComponentBase
     {
-        [Inject]
-        protected HttpClient Http { get; set; }
-
-        protected override async Task OnInitializedAsync()
-        {
-        }
-
     }
 }

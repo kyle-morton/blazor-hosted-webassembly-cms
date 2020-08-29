@@ -1,0 +1,15 @@
+﻿@page "/blogs/details/{id:int}"
+@inherits BlogDetailsBase
+
+@if (Blog == null)
+{
+    <span>Loading blog...</span>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Blog Details @Blog.Id</h4>
+        </div>
+    </div>
+}

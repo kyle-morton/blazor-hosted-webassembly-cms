@@ -10,12 +10,12 @@ namespace BlazorCMS.Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BlogController : ControllerBase
+    public class BlogsController : ControllerBase
     {
-        private readonly ILogger<BlogController> _logger;
+        private readonly ILogger<BlogsController> _logger;
         private readonly IBlogService _blogService;
 
-        public BlogController(ILogger<BlogController> logger, IBlogService blogService)
+        public BlogsController(ILogger<BlogsController> logger, IBlogService blogService)
         {
             _logger = logger;
             _blogService = blogService;
@@ -41,6 +41,11 @@ namespace BlazorCMS.Server.Controllers
         [Route("Create")]
         public IActionResult Create(CreateBlogViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model"); //todo: add a GetErrors() extension method to ModelState
+            }
+
             var blog = _blogService.Create(vm.ToModel());
             return Ok(BlogViewModel.From(blog));
         }
@@ -49,6 +54,11 @@ namespace BlazorCMS.Server.Controllers
         [Route("Update")]
         public IActionResult Update(UpdateBlogViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model"); //todo: add a GetErrors() extension method to ModelState
+            }
+
             var blog = _blogService.Update(vm.ToModel());
             return Ok(BlogViewModel.From(blog));
         }
@@ -57,6 +67,11 @@ namespace BlazorCMS.Server.Controllers
         [Route("Delete")]
         public IActionResult Delete(int id)
         {
+            if (id == 0)
+            {
+                return BadRequest("Id is required"); //todo: add a GetErrors() extension method to ModelState
+            }
+
             _blogService.Delete(id);
             return Ok(); 
         }

@@ -20,8 +20,8 @@ namespace BlazorCMS.Web.Components
         protected override async Task OnInitializedAsync()
         {
             Posts = BlogId > 0
-                ? await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPost/ByBlog/{BlogId}")
-                : await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPost/Recent");
+                ? await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPosts/ByBlog/{BlogId}")
+                : await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPosts/Recent");
         }
     }
 }

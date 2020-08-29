@@ -8,12 +8,12 @@ namespace BlazorCMS.Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BlogPostController : ControllerBase
+    public class BlogPostsController : ControllerBase
     {
-        private readonly ILogger<BlogPostController> _logger;
+        private readonly ILogger<BlogPostsController> _logger;
         private readonly IBlogPostService _blogPostService;
 
-        public BlogPostController(ILogger<BlogPostController> logger, IBlogPostService blogPostService)
+        public BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostService blogPostService)
         {
             _logger = logger;
             _blogPostService = blogPostService;

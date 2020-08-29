@@ -1,0 +1,24 @@
+﻿@page "/blogs/create"
+@inherits CreateBlogBase
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create Blog</h4>
+        <EditForm Model="@Blog" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <label for="name" class="col-sm-3 required">Name: </label>
+                <InputText id="name" class="form-control col-sm-8" @bind-Value="@Blog.Name" placeholder="Enter title"></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="Description" class="col-sm-3 required">Description: </label>
+                <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Blog.Description" placeholder="Enter Description"></InputTextArea>
+            </div>
+
+            <button type="submit" class="btn btn-primary edit-btn">Submit</button>
+        </EditForm>
+    </div>
+</div>
+
+
