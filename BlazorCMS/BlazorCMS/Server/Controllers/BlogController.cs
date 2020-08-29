@@ -2,8 +2,6 @@
 using BlazorCMS.Shared.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace BlazorCMS.Server.Controllers
 {
@@ -22,10 +20,42 @@ namespace BlazorCMS.Server.Controllers
         }
 
         [HttpGet]
-        public List<Blog> GetAll()
+        public IActionResult GetAll()
         {
             var results = _blogService.GetBlogs();
-            return results;
+            return Ok(results);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Details(int id)
+        {
+            var result = _blogService.GetBlog(id);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Create(Blog blog)
+        {
+            blog = _blogService.Create(blog);
+            return Ok(blog);
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public IActionResult Update(Blog blog)
+        {
+            blog = _blogService.Update(blog);
+            return Ok(blog);
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        public IActionResult Delete(int id)
+        {
+            _blogService.Delete(id);
+            return Ok(); 
         }
     }
 }

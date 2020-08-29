@@ -25,17 +25,27 @@ namespace BlazorCMS.Server.Controllers
         }
 
         [HttpGet]
-        public List<BlogPost> GetAll()
+        [Route("Recent")]
+        public IActionResult Recent()
         {
-            return new List<BlogPost>();
+            var recents = _blogPostService.GetPosts().OrderByDescending(c => c.CreateDate).Take(5);
+            return Ok(recents);
         }
 
         [HttpGet]
         [Route("ByBlog/{blogId}")]
-        public List<BlogPost> GetAll(int blogId)
+        public IActionResult GetAll(int blogId)
         {
             var results = _blogPostService.GetBlogPosts(blogId);
-            return results;
+            return Ok(results);
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var result = _blogPostService.GetPost(id);
+            return Ok(result);
         }
     }
 }

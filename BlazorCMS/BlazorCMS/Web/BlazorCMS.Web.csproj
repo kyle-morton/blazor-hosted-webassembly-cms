@@ -20,4 +20,10 @@
     <ProjectReference Include="..\..\BlazorCMS.SharedModels\BlazorCMS.SharedModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images\webb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

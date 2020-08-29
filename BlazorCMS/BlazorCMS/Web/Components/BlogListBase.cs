@@ -9,6 +9,9 @@ namespace BlazorCMS.Web.Components
 {
     public class BlogListBase : ComponentBase
     {
+        [Parameter]
+        public bool ShowMoreLink { get; set; }
+
         [Inject]
         protected NavigationManager NavigationManager { get; set; }
 

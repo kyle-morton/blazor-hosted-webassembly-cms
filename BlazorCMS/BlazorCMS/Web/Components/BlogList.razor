@@ -19,18 +19,25 @@ else
         <tbody>
             @foreach (var blog in Blogs)
             {
-                <tr >
+                <tr>
                     <td>@blog.Id</td>
                     <td>@blog.CreateDate.ToShortDateString()</td>
                     <td>@blog.Name</td>
                     <td>@blog.Description</td>
                     <td>
-                        <a href="@($"/blogs/{blog.Id}/posts")">
-                            Posts
+                        <a href="@($"/blogs/{blog.Id}/posts")" target="_blank">
+                            <i class="fa fa-search" aria-hidden="true"></i>
                         </a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    @if (ShowMoreLink)
+    {
+        <a href="@($"/blogs")">
+            More...
+        </a>
+    }
 }
