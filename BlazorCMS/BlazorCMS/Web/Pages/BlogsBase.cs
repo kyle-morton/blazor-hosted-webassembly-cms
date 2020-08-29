@@ -12,11 +12,8 @@ namespace BlazorCMS.Web.Pages
         [Inject]
         protected HttpClient Http { get; set; }
 
-        protected List<Blog> Blogs;
-
         protected override async Task OnInitializedAsync()
         {
-            Blogs = await Http.GetFromJsonAsync<List<Blog>>("Blog");
         }
 
     }
