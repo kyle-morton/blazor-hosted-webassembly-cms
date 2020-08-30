@@ -1,18 +1,13 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.Blogs;
+using BlazorCMS.Web.Services;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Pages.Blogs
 {
-    public class BlogDetailsBase : ComponentBase
+    public class DetailsBase : PageBase
     {
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        public HttpClient Http { get; set; }
 
         [Parameter]
         public int Id { get; set; }
@@ -31,11 +26,25 @@ namespace BlazorCMS.Web.Pages.Blogs
             }
         }
 
+        protected async Task HandleValidSubmit()
+        {
+            var result = await Http.PostAsJsonAsync("Blogs/Update", Blog);
+            if (result.IsSuccessStatusCode)
+            {
+                Blog = await result.Content.ReadFromJsonAsync<BlogViewModel>();
+                await NotificationService.SendMessage("Blog Updated");
+            } 
+            else
+            {
+                await NotificationService.SendMessage("Blog Update Failed!", UIMessageType.Error);
+            }
+        }
         protected async Task Delete()
         {
             var result = await Http.DeleteAsync($"Blogs/Delete/{Id}");
             if (result.IsSuccessStatusCode)
             {
+                await NotificationService.SendMessage("Blog Deleted");
                 NavigationManager.NavigateTo("/Blogs");
             }
         }

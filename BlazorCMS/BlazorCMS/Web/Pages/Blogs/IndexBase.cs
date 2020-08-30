@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Pages
 {
-    public class BlogsBase : ComponentBase
+    public class IndexBase : ComponentBase
     {
     }
 }

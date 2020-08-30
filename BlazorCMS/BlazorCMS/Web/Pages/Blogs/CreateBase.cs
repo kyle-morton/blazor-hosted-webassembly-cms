@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Pages.Blogs
 {
-    public class CreateBlogBase : ComponentBase
+    public class CreateBase : ComponentBase
     {
         [Inject]
         protected NavigationManager NavigationManager { get; set; }

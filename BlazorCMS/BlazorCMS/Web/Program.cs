@@ -1,3 +1,4 @@
+using BlazorCMS.Web.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,9 @@ namespace BlazorCMS.Web
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/") });
+
+            // UI services
+            builder.Services.AddTransient<IUINotificationService, UINotificationService>();
 
             await builder.Build().RunAsync();
         }
