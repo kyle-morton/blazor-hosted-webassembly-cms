@@ -26,17 +26,17 @@ namespace BlazorCMS.Web.Pages.Blogs
             }
         }
 
-        protected async Task HandleValidSubmit()
+        protected async Task Submit()
         {
             var result = await Http.PostAsJsonAsync("Blogs/Update", Blog);
             if (result.IsSuccessStatusCode)
             {
                 Blog = await result.Content.ReadFromJsonAsync<BlogViewModel>();
-                await NotificationService.SendMessage("Blog Updated");
+                await NotificationService.SendMessageAsync("Blog Updated");
             } 
             else
             {
-                await NotificationService.SendMessage("Blog Update Failed!", UIMessageType.Error);
+                await NotificationService.SendMessageAsync("Blog Update Failed!", UIMessageType.Error);
             }
         }
         protected async Task Delete()
@@ -44,7 +44,7 @@ namespace BlazorCMS.Web.Pages.Blogs
             var result = await Http.DeleteAsync($"Blogs/Delete/{Id}");
             if (result.IsSuccessStatusCode)
             {
-                await NotificationService.SendMessage("Blog Deleted");
+                await NotificationService.SendMessageAsync("Blog Deleted");
                 NavigationManager.NavigateTo("/Blogs");
             }
         }

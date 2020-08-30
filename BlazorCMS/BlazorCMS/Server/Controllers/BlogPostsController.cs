@@ -1,4 +1,5 @@
 ﻿using BlazorCMS.Core.Services;
+using BlazorCMS.Server.Extensions;
 using BlazorCMS.SharedModels.ViewModels.BlogPosts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,6 +55,38 @@ namespace BlazorCMS.Server.Controllers
         [Route("Create")]
         public IActionResult Create(CreateBlogPostViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrors()); 
+            }
+
+            var blog = _blogPostService.Create(vm.ToModel());
+            return Ok(BlogPostViewModel.From(blog));
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public IActionResult Update(UpdateBlogPostViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model"); 
+            }
+
+            var blog = _blogPostService.Update(vm.ToModel());
+            return Ok(BlogPostViewModel.From(blog));
+        }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest("Id is required"); 
+            }
+
+            _blogPostService.Delete(id);
             return Ok();
         }
     }

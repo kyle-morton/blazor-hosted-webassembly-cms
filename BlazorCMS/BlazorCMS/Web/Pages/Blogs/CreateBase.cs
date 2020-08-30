@@ -1,19 +1,12 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.Blogs;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Pages.Blogs
 {
-    public class CreateBase : ComponentBase
+    public class CreateBase : PageBase
     {
-        [Inject]
-        protected NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        protected HttpClient Http { get; set; }
-
         public CreateBlogViewModel Blog { get; set; }
 
 
@@ -26,12 +19,13 @@ namespace BlazorCMS.Web.Pages.Blogs
             };
         }
 
-        protected async Task HandleValidSubmit()
+        protected async Task Submit()
         {
             var result = await Http.PostAsJsonAsync("Blogs/Create", Blog);
             if (result.IsSuccessStatusCode)
             {
                 var createdBlog = await result.Content.ReadFromJsonAsync<BlogViewModel>();
+                await NotificationService.SendMessageAsync("Blog Created");
                 NavigationManager.NavigateTo($"/Blogs/Details/{createdBlog.Id}");
             }
             else

@@ -13,7 +13,7 @@ namespace BlazorCMS.Web.Services
 
     public interface IUINotificationService
     {
-        Task SendMessage(string message, UIMessageType type = UIMessageType.Success);
+        Task SendMessageAsync(string message, UIMessageType type = UIMessageType.Success);
     }
 
     public class UINotificationService : IUINotificationService
@@ -23,7 +23,7 @@ namespace BlazorCMS.Web.Services
         {
             _jsRuntime = jsRuntime;
         }
-        public async Task SendMessage(string message, UIMessageType type = UIMessageType.Success)
+        public async Task SendMessageAsync(string message, UIMessageType type = UIMessageType.Success)
         {
             switch (type)
             {

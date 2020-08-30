@@ -43,7 +43,7 @@ namespace BlazorCMS.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid model"); //todo: add a GetErrors() extension method to ModelState
+                return BadRequest("Invalid model"); 
             }
 
             var blog = _blogService.Create(vm.ToModel());
@@ -56,7 +56,7 @@ namespace BlazorCMS.Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid model"); //todo: add a GetErrors() extension method to ModelState
+                return BadRequest("Invalid model"); 
             }
 
             var blog = _blogService.Update(vm.ToModel());
@@ -69,7 +69,7 @@ namespace BlazorCMS.Server.Controllers
         {
             if (id == 0)
             {
-                return BadRequest("Id is required"); //todo: add a GetErrors() extension method to ModelState
+                return BadRequest("Id is required"); 
             }
 
             _blogService.Delete(id);

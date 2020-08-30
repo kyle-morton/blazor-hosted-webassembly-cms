@@ -190,3 +190,8 @@ app {
         display: block;
     }
 }
+
+.required:after {
+    content: " *";
+    color: red;
+}

@@ -23,7 +23,7 @@ else
                     <td>@post.CreateDate.ToShortDateString()</td>
                     <td>@post.Title</td>
                     <td>
-                        <a>
+                        <a href="@($"/posts/details/{post.Id}")">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                     </td>

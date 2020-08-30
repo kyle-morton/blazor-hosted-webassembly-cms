@@ -11,7 +11,7 @@ else
         <div class="card-body">
             
             <h4 class="card-title">Details for <strong>@Blog.Name</strong></h4>
-            <EditForm Model="@Blog" OnValidSubmit="@HandleValidSubmit">
+            <EditForm Model="@Blog" OnValidSubmit="@Submit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="form-group row">
