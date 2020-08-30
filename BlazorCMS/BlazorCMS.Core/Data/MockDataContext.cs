@@ -7,17 +7,46 @@ namespace BlazorCMS.Core.Data
 {
     public static class MockDataContext
     {
-        public static List<Blog> Blogs { get; set; }
-        public static List<BlogPost> BlogPosts { get; set; }
-        public static List<User> Users { get; set; }
-        public static List<Person> People { get; set; }
+        private static List<Blog> _blogs { get; set; }
+        private static List<BlogPost> _blogPosts { get; set; }
+        private static List<User> _users { get; set; }
+        private static List<Person> _people { get; set; }
 
-        public static int NewBlogId => Blogs.Count > 0 ? Blogs.Max(b => b.Id) + 1 : 1;
-        public static int NewPostId => BlogPosts.Count > 0 ? BlogPosts.Max(bp => bp.Id) + 1 : 1;
+        public static List<Blog> Blogs
+        {
+            get
+            {
+                var blogs = _blogs;
+                foreach (var blog in blogs)
+                {
+                    blog.BlogPosts = _blogPosts.Where(p => p.BlogId == blog.Id).ToList();
+                }
+
+                return blogs;
+            }
+        }
+        public static List<BlogPost> BlogPosts
+        {
+            get
+            {
+                var blogPosts = _blogPosts;
+                foreach (var post in blogPosts)
+                {
+                    post.Blog = _blogs.Single(b => b.Id == post.BlogId);
+                }
+
+                return blogPosts;
+            }
+        }
+        public static List<User> Users => _users;
+        public static List<Person> People => _people;
+
+        public static int NewBlogId => _blogs.Count > 0 ? _blogs.Max(b => b.Id) + 1 : 1;
+        public static int NewPostId => _blogPosts.Count > 0 ? _blogPosts.Max(bp => bp.Id) + 1 : 1;
 
         public static void Init()
         {
-            Blogs = new List<Blog>
+            _blogs = new List<Blog>
             {
                 new Blog
                 {
@@ -37,7 +66,7 @@ namespace BlazorCMS.Core.Data
                 }
             };
 
-            BlogPosts = new List<BlogPost>
+            _blogPosts = new List<BlogPost>
             {
                 new BlogPost
                 {
@@ -81,7 +110,7 @@ namespace BlazorCMS.Core.Data
                 }
             };
 
-            Users = new List<User>
+            _users = new List<User>
             {
                 new User
                 {
@@ -101,7 +130,7 @@ namespace BlazorCMS.Core.Data
                 }
             };
 
-            People = new List<Person>
+            _people = new List<Person>
             {
                 new Person
                 {
@@ -115,5 +144,31 @@ namespace BlazorCMS.Core.Data
             };
         }
 
+        public static void Delete(int id, MockDataType type)
+        {
+            switch(type)
+            {
+                case MockDataType.Blog:
+                    _blogs = _blogs.Where(b => b.Id != id).ToList();
+                    break;
+                case MockDataType.BlogPost:
+                    _blogPosts = _blogPosts.Where(b => b.Id != id).ToList();
+                    break;
+                case MockDataType.User:
+                    _users = _users.Where(b => b.Id != id).ToList();
+                    break;
+                case MockDataType.Person:
+                    _people = _people.Where(b => b.Id != id).ToList();
+                    break;
+            }
+        }
+
+        public enum MockDataType
+        {
+            Blog, 
+            BlogPost,
+            User,
+            Person
+        }
     }
 }

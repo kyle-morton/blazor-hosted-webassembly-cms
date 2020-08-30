@@ -9,6 +9,7 @@ else
 {
     <div class="card">
         <div class="card-body">
+            
             <h4 class="card-title">Details for <strong>@Blog.Name</strong></h4>
             <EditForm Model="@Blog" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator />
@@ -25,6 +26,9 @@ else
                 <button type="submit" class="btn btn-primary edit-btn mr-1">Submit</button>
                 <a @onclick="Delete" class="btn btn-danger" style="color:white;">Delete</a>
             </EditForm>
+
+            <PostList BlogId="@Blog.Id"></PostList>
+
         </div>
     </div>
     

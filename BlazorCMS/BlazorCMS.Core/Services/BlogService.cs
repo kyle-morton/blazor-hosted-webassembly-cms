@@ -27,7 +27,7 @@ namespace BlazorCMS.Core.Services
 
         public void Delete(int id)
         {
-            MockDataContext.Blogs = MockDataContext.Blogs.Where(b => b.Id != id).ToList();
+            MockDataContext.Delete(id, MockDataContext.MockDataType.Blog);           
         }
 
         public Blog GetBlog(int id)
