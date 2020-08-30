@@ -31,6 +31,14 @@ else
                     </td>
                 </tr>
             }
+            @if(Blogs.Count == 0)
+            {
+                <tr>
+                    <td colspan="5">
+                         No Blogs Found...
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 

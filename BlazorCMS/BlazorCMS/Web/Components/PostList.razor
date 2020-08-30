@@ -29,6 +29,14 @@ else
                     </td>
                 </tr>
             }
+            @if (Posts.Count == 0)
+            {
+                <tr>
+                    <td colspan="4">
+                        No Posts Found...
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }

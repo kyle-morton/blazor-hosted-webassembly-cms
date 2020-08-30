@@ -9,7 +9,7 @@ else
 {
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">@Blog.Name</h4>
+            <h4 class="card-title">Details for <strong>@Blog.Name</strong></h4>
             <EditForm Model="@Blog" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -23,7 +23,7 @@ else
                 </div>
 
                 <button type="submit" class="btn btn-primary edit-btn mr-1">Submit</button>
-                <a @onclick="Delete" class="btn btn-danger">Delete</a>
+                <a @onclick="Delete" class="btn btn-danger" style="color:white;">Delete</a>
             </EditForm>
         </div>
     </div>
