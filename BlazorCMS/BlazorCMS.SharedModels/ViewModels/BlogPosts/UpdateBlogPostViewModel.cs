@@ -12,8 +12,9 @@ namespace BlazorCMS.SharedModels.ViewModels.BlogPosts
         public string Title { get; set; }
         [Required]
         public string Content { get; set; }
+        [Required]
         public string Author { get; set; }
-
+        [Required]
         public int BlogId { get; set; }
 
         public BlogPost ToModel()

@@ -27,7 +27,13 @@ else
                 <a @onclick="Delete" class="btn btn-danger" style="color:white;">Delete</a>
             </EditForm>
 
-            <PostList BlogId="@Blog.Id"></PostList>
+            <div class="my-3">
+                <PostList BlogId="@Blog.Id"></PostList>
+            </div>
+
+            <a href="@($"/posts/create/{Blog.Id}")" class="btn btn-primary">
+                Create Post
+            </a>
 
         </div>
     </div>

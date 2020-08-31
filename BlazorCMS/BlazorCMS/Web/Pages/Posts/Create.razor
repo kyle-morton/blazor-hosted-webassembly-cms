@@ -1,0 +1,43 @@
+﻿@page "/posts/create/{blogId}"
+@inherits CreateBase
+
+@if (BlogPost == null)
+{
+    <span>Loading Form...</span>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+
+            <EditForm Model="@BlogPost" OnValidSubmit="@Submit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group row">
+                    <label for="title" class="col-sm-3 required">Title: </label>
+                    <InputText id="title" class="form-control col-sm-8" @bind-Value="@BlogPost.Title" placeholder="Enter title"></InputText>
+                </div>
+                <div class="form-group row">
+                    <label for="content" class="col-sm-3 required">Description: </label>
+                    <InputTextArea id="content" class="form-control col-sm-8" @bind-Value="@BlogPost.Content" placeholder="Enter Content"></InputTextArea>
+                </div>
+                <div class="form-group row">
+                    <label for="author" class="col-sm-3 required">Author: </label>
+                    <InputTextArea id="author" class="form-control col-sm-8" @bind-Value="@BlogPost.Author" placeholder="Enter Author"></InputTextArea>
+                </div>
+                <div class="form-group row">
+                    <label for="blog" class="col-sm-3">Blog: </label>
+                    <InputSelect id="blog" class="form-control col-sm-8" @bind-Value="@BlogId">
+                        @foreach (var blog in BlogPost.BlogOptions)
+                        {
+                        <option value="@blog.Value.ToString()">@blog.Text</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <button type="submit" class="btn btn-primary edit-btn mr-1">Submit</button>
+            </EditForm>
+
+        </div>
+    </div>
+}

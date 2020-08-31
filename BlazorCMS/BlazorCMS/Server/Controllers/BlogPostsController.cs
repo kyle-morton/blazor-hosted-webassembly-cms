@@ -13,12 +13,13 @@ namespace BlazorCMS.Server.Controllers
     {
         private readonly ILogger<BlogPostsController> _logger;
         private readonly IBlogPostService _blogPostService;
+        private readonly IBlogService _blogService;
 
-        public BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostService blogPostService)
+        public BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostService blogPostService, IBlogService blogService)
         {
             _logger = logger;
             _blogPostService = blogPostService;
-
+            _blogService = blogService;
         }
 
         [HttpGet]
@@ -49,6 +50,13 @@ namespace BlazorCMS.Server.Controllers
             }
 
             return Ok(BlogPostViewModel.From(result));
+        }
+
+        [Route("Create/{blogId}")]
+        public IActionResult Create(int blogId)
+        {
+            var blogs = _blogService.GetBlogs();
+            return Ok(CreateBlogPostViewModel.From(blogId, blogs));
         }
 
         [HttpPost]
