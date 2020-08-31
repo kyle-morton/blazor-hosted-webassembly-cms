@@ -3,13 +3,13 @@
 
 @if (Blog == null)
 {
-    <span>Loading blog...</span>
+    <LoadingIndicator></LoadingIndicator>
 }
 else
 {
     <div class="card">
         <div class="card-body">
-            
+
             <h4 class="card-title">Details for <strong>@Blog.Name</strong></h4>
             <EditForm Model="@Blog" OnValidSubmit="@Submit">
                 <DataAnnotationsValidator />
@@ -37,5 +37,5 @@ else
 
         </div>
     </div>
-    
+
 }
