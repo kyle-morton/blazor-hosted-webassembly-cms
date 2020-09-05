@@ -1,8 +1,7 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.BlogPosts;
+using BlazorCMS.Web.Services.Api;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace BlazorCMS.Web.Components
@@ -13,15 +12,15 @@ namespace BlazorCMS.Web.Components
         public int BlogId { get; set; }
 
         [Inject]
-        protected HttpClient Http { get; set; }
+        protected IBlogPostService _blogPostService { get; set; }
 
         protected List<BlogPostViewModel> Posts { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             Posts = BlogId > 0
-                ? await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPosts/ByBlog/{BlogId}")
-                : await Http.GetFromJsonAsync<List<BlogPostViewModel>>($"BlogPosts/Recent");
+                ? await _blogPostService.GetByBlogAsync(BlogId)
+                : await _blogPostService.GetRecentAsync();
         }
     }
 }

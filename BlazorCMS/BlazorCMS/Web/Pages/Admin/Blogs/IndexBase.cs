@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Pages
+namespace BlazorCMS.Web.Pages.Admin.Blogs
 {
     public class IndexBase : ComponentBase
     {

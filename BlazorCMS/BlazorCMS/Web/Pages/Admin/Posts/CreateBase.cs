@@ -1,31 +1,32 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.BlogPosts;
 using BlazorCMS.Web.Services;
+using BlazorCMS.Web.Services.Api;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Pages.Posts
+namespace BlazorCMS.Web.Pages.Admin.Posts
 {
     public class CreateBase : PageBase
     {
-
+        [Inject]
+        private IBlogPostService _blogPostService { get; set; }
         [Parameter]
         public string BlogId { get; set; }
         public CreateBlogPostViewModel BlogPost { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            BlogPost = await Http.GetFromJsonAsync<CreateBlogPostViewModel>($"BlogPosts/Create/{BlogId}");
+            BlogPost = await _blogPostService.GetCreateAsync(int.Parse(BlogId));
         }
 
         protected async Task Submit()
         {
             BlogPost.BlogId = int.Parse(BlogId);
-            var result = await Http.PostAsJsonAsync("BlogPosts/Create", BlogPost);
-            if (result.IsSuccessStatusCode)
+            var result = await _blogPostService.CreateAsync(BlogPost);
+            if (result != null)
             {
                 await NotificationService.SendMessageAsync("Post Created");
-                NavigationManager.NavigateTo($"/blogs/details/{BlogPost.BlogId}");
+                NavigationManager.NavigateTo($"/admin/blogs/details/{BlogPost.BlogId}");
             }
             else
             {

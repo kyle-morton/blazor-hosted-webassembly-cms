@@ -1,10 +1,10 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.Blogs;
 using BlazorCMS.Web.Services;
+using BlazorCMS.Web.Services.Api;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Pages.Blogs
+namespace BlazorCMS.Web.Pages.Admin.Blogs
 {
     public class DetailsBase : PageBase
     {
@@ -12,26 +12,29 @@ namespace BlazorCMS.Web.Pages.Blogs
         [Parameter]
         public int Id { get; set; }
 
+        [Inject]
+        protected IBlogService _blogService { get; set; }
+
         public BlogViewModel Blog { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             if (Id == 0)
             {
-                NavigationManager.NavigateTo("/Blogs");
+                NavigationManager.NavigateTo("/admin/blogs");
             }
             else
             {
-                Blog = await Http.GetFromJsonAsync<BlogViewModel>($"Blogs/{Id}");
+                Blog = await _blogService.GetAsync(Id);
             }
         }
 
         protected async Task Submit()
         {
-            var result = await Http.PostAsJsonAsync("Blogs/Update", Blog);
-            if (result.IsSuccessStatusCode)
+            var result = await _blogService.UpdateAsync(Blog);
+            if (result != null)
             {
-                Blog = await result.Content.ReadFromJsonAsync<BlogViewModel>();
+                Blog = result;
                 await NotificationService.SendMessageAsync("Blog Updated");
             } 
             else
@@ -41,11 +44,15 @@ namespace BlazorCMS.Web.Pages.Blogs
         }
         protected async Task Delete()
         {
-            var result = await Http.DeleteAsync($"Blogs/Delete/{Id}");
-            if (result.IsSuccessStatusCode)
+            var result = await _blogService.DeleteAsync(Id);
+            if (result)
             {
                 await NotificationService.SendMessageAsync("Blog Deleted");
-                NavigationManager.NavigateTo("/Blogs");
+                NavigationManager.NavigateTo("/admin/blogs");
+            }
+            else
+            {
+                await NotificationService.SendMessageAsync("Unable to delete blog!", UIMessageType.Error);
             }
         }
     }

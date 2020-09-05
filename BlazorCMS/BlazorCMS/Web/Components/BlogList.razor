@@ -25,7 +25,7 @@ else
                     <td>@blog.Name</td>
                     <td>@blog.Description</td>
                     <td>
-                        <a href="@($"/blogs/details/{blog.Id}")">
+                        <a href="@($"/admin/blogs/details/{blog.Id}")">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </a>
                     </td>
@@ -44,7 +44,7 @@ else
 
     @if (ShowMoreLink)
     {
-        <a href="@($"/blogs")">
+        <a href="@($"/admin/blogs")">
             More...
         </a>
     }

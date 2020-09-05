@@ -1,4 +1,4 @@
-﻿@page "/blogs/details/{id:int}"
+﻿@page "/admin/blogs/details/{id:int}"
 @inherits DetailsBase
 
 @if (Blog == null)
@@ -31,7 +31,7 @@ else
                 <PostList BlogId="@Blog.Id"></PostList>
             </div>
 
-            <a href="@($"/posts/create/{Blog.Id}")" class="btn btn-primary">
+            <a href="@($"/admin/posts/create/{Blog.Id}")" class="btn btn-primary">
                 Create Post
             </a>
 

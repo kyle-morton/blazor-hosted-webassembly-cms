@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Pages
+namespace BlazorCMS.Web.Pages.Admin.Posts
 {
-    public class BlogPostsBase : ComponentBase
+    public class BlogPostsBase : PageBase
     {
         [Inject]
         protected NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        protected HttpClient Http { get; set; } 
 
         [Parameter]
         public int BlogId { get; set; }
@@ -19,7 +15,7 @@ namespace BlazorCMS.Web.Pages
         {
             if (BlogId == 0)
             {
-                NavigationManager.NavigateTo("/blogs");
+                NavigationManager.NavigateTo("/admin/blogs");
             }
         }
     }
