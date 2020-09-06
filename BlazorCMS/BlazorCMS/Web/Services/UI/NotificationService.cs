@@ -1,7 +1,7 @@
 ﻿using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Services
+namespace BlazorCMS.Web.Services.UI
 {
     public enum UIMessageType
     {
@@ -11,15 +11,15 @@ namespace BlazorCMS.Web.Services
         Info
     }
 
-    public interface IUINotificationService
+    public interface INotificationService
     {
         Task SendMessageAsync(string message, UIMessageType type = UIMessageType.Success);
     }
 
-    public class UINotificationService : IUINotificationService
+    public class NotificationService : INotificationService
     {
         private IJSRuntime _jsRuntime { get; set; }
-        public UINotificationService(IJSRuntime jsRuntime)
+        public NotificationService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
         }

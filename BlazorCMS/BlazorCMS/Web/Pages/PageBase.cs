@@ -1,4 +1,4 @@
-﻿using BlazorCMS.Web.Services;
+﻿using BlazorCMS.Web.Services.UI;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorCMS.Web.Pages
@@ -9,6 +9,6 @@ namespace BlazorCMS.Web.Pages
         protected NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        protected IUINotificationService NotificationService { get; set; }
+        protected INotificationService NotificationService { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using BlazorCMS.SharedModels.ViewModels.BlogPosts;
-using BlazorCMS.Web.Services;
 using BlazorCMS.Web.Services.Api;
+using BlazorCMS.Web.Services.UI;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 

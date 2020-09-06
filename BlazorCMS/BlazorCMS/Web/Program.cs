@@ -1,5 +1,6 @@
 using BlazorCMS.Web.Services;
 using BlazorCMS.Web.Services.Api;
+using BlazorCMS.Web.Services.UI;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,7 +20,7 @@ namespace BlazorCMS.Web
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/") });
 
             // UI services
-            builder.Services.AddTransient<IUINotificationService, UINotificationService>();
+            builder.Services.AddTransient<INotificationService, NotificationService>();
             builder.Services.AddTransient<IBlogPostService, BlogPostService>();
             builder.Services.AddTransient<IBlogService, BlogService>();
 
