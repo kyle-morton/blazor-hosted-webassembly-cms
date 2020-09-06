@@ -1,0 +1,17 @@
+﻿<div class="row mb-3">
+    <div class="col">
+        <BlazeAnchor CssClasses="btn btn-light" Href="@BackHref"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</BlazeAnchor>
+        @ChildContent
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string BackHref { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

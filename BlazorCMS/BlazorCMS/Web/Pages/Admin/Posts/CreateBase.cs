@@ -14,6 +14,8 @@ namespace BlazorCMS.Web.Pages.Admin.Posts
         public string BlogId { get; set; }
         public CreateBlogPostViewModel BlogPost { get; set; }
 
+        public string BackHref => BlogPost != null ? $"/admin/blogs/details/{BlogPost.BlogId}" : "/admin/blogs";
+
         protected override async Task OnInitializedAsync()
         {
             BlogPost = await _blogPostService.GetCreateAsync(int.Parse(BlogId));
@@ -21,6 +23,7 @@ namespace BlazorCMS.Web.Pages.Admin.Posts
 
         protected async Task Submit()
         {
+            IsProcessing = true;
             BlogPost.BlogId = int.Parse(BlogId);
             var result = await _blogPostService.CreateAsync(BlogPost);
             if (result != null)
@@ -32,6 +35,7 @@ namespace BlazorCMS.Web.Pages.Admin.Posts
             {
                 await NotificationService.SendMessageAsync("Post Create Failed!", UIMessageType.Error);
             }
+            IsProcessing = false;
         }
 
 

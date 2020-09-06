@@ -10,5 +10,7 @@ namespace BlazorCMS.Web.Pages
 
         [Inject]
         protected INotificationService NotificationService { get; set; }
+
+        public bool IsProcessing { get; set; }
     }
 }

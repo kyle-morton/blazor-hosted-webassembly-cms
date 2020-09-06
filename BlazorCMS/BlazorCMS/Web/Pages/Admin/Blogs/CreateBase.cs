@@ -23,6 +23,7 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
 
         protected async Task Submit()
         {
+            IsProcessing = true;
             var result = await _blogService.CreateAsync(Blog);
             if (result != null)
             {
@@ -33,6 +34,7 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
             {
                 // error message
             }
+            IsProcessing = false;
         }
 
     }

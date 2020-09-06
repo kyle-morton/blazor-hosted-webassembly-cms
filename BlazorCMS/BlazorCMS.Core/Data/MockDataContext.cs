@@ -150,6 +150,7 @@ namespace BlazorCMS.Core.Data
             {
                 case MockDataType.Blog:
                     _blogs = _blogs.Where(b => b.Id != id).ToList();
+                    _blogPosts = _blogPosts.Where(p => p.BlogId != id).ToList();
                     break;
                 case MockDataType.BlogPost:
                     _blogPosts = _blogPosts.Where(b => b.Id != id).ToList();

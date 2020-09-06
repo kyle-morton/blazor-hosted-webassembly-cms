@@ -1,0 +1,42 @@
+﻿<a class="@CssClasses" @onclick="Click" href="@Href" target="@Target">
+    @if (Active)
+    {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    }
+    else
+    {
+        @ChildContent
+    }
+</a>
+
+@code {
+
+    [Parameter]
+    public string CssClasses { get; set; } = "btn btn-primary";
+
+    [Parameter]
+    public bool Active { get; set; }
+
+    [Parameter]
+    public string Href { get; set; } = "";
+
+    [Parameter]
+    public string Target { get; set; } = "_self";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    public async Task Click()
+    {
+        // Disregard click if active
+        if (Active)
+        {
+            return;
+        }
+
+        await OnClick.InvokeAsync(null);
+    }
+}

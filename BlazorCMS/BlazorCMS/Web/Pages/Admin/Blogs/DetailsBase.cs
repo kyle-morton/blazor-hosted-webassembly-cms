@@ -18,6 +18,10 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
 
         public BlogViewModel Blog { get; set; }
 
+        public bool IsDeleteProcessing { get; set; }
+
+        public string Title => Blog != null ? $"Details for {Blog.Name}" : "";
+
         protected override async Task OnInitializedAsync()
         {
             if (Id == 0)
@@ -32,6 +36,7 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
 
         protected async Task Submit()
         {
+            IsProcessing = true;
             var result = await _blogService.UpdateAsync(Blog);
             if (result != null)
             {
@@ -42,9 +47,11 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
             {
                 await NotificationService.SendMessageAsync("Blog Update Failed!", UIMessageType.Error);
             }
+            IsProcessing = false;
         }
         protected async Task Delete()
         {
+            IsDeleteProcessing = true;
             var result = await _blogService.DeleteAsync(Id);
             if (result)
             {
@@ -55,6 +62,7 @@ namespace BlazorCMS.Web.Pages.Admin.Blogs
             {
                 await NotificationService.SendMessageAsync("Unable to delete blog!", UIMessageType.Error);
             }
+            IsDeleteProcessing = false;
         }
     }
 }

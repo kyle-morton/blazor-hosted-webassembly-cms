@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlazorCMS.Web.Components
+namespace BlazorCMS.Web.Components.Admin
 {
     public class BlogListBase : ComponentBase
     {

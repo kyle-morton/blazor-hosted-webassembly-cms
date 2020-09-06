@@ -1,13 +1,12 @@
 ﻿@page "/admin/blogs"
 @inherits IndexBase
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Blogs</h5>
-        <BlogList></BlogList>
-    </div>
-</div>
+<TopShelf BackHref="/admin"></TopShelf>
 
-<a href="/admin/blogs/create" class="btn btn-primary mt-3">
+<Card Title="Blogs">
+    <BlogList></BlogList>
+</Card>
+
+<BlazeAnchor Href="/admin/blogs/create" CssClasses="btn btn-primary mt-3">
     Create Blog
-</a>
+</BlazeAnchor>

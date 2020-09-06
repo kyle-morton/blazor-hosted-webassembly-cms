@@ -27,7 +27,7 @@ namespace BlazorCMS.Core.Services
 
         public void Delete(int id)
         {
-            MockDataContext.Delete(id, MockDataContext.MockDataType.Blog);           
+            MockDataContext.Delete(id, MockDataContext.MockDataType.Blog);
         }
 
         public Blog GetBlog(int id)

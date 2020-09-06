@@ -1,41 +1,34 @@
 ﻿@page "/admin/blogs/details/{id:int}"
 @inherits DetailsBase
 
+<TopShelf BackHref="/admin/blogs"></TopShelf>
+
 @if (Blog == null)
 {
     <LoadingIndicator></LoadingIndicator>
 }
 else
 {
-    <div class="card">
-        <div class="card-body">
-
-            <h4 class="card-title">Details for <strong>@Blog.Name</strong></h4>
-            <EditForm Model="@Blog" OnValidSubmit="@Submit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="form-group row">
-                    <label for="name" class="col-sm-3 required">Name: </label>
-                    <InputText id="name" class="form-control col-sm-8" @bind-Value="@Blog.Name" placeholder="Enter title"></InputText>
-                </div>
-                <div class="form-group row">
-                    <label for="Description" class="col-sm-3 required">Description: </label>
-                    <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Blog.Description" placeholder="Enter Description"></InputTextArea>
-                </div>
-
-                <button type="submit" class="btn btn-primary edit-btn mr-1">Submit</button>
-                <a @onclick="Delete" class="btn btn-danger" style="color:white;">Delete</a>
-            </EditForm>
-
-            <div class="my-3">
-                <PostList BlogId="@Blog.Id"></PostList>
+    <Card Title="@Title">
+        <EditForm Model="@Blog" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <label for="name" class="col-sm-3 required">Name: </label>
+                <InputText id="name" class="form-control col-sm-8" @bind-Value="@Blog.Name" placeholder="Enter title"></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="Description" class="col-sm-3 required">Description: </label>
+                <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Blog.Description" placeholder="Enter Description"></InputTextArea>
             </div>
 
-            <a href="@($"/admin/posts/create/{Blog.Id}")" class="btn btn-primary">
-                Create Post
-            </a>
+            <BlazeButton Type="submit" CssClasses="btn btn-primary edit-btn mr-1" Active="IsProcessing">Submit</BlazeButton>
+            <BlazeButton OnClick="Delete" CssClasses="btn btn-danger" Active="IsDeleteProcessing">Delete</BlazeButton>
+        </EditForm>
 
+        <div class="my-3">
+            <PostList BlogId="@Blog.Id"></PostList>
         </div>
-    </div>
-
+        <BlazeAnchor Href="@($"/admin/posts/create/{Blog.Id}")">Create Post</BlazeAnchor>
+    </Card>
 }

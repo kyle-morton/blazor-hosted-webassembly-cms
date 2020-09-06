@@ -1,6 +1,8 @@
 ﻿@page "/admin/posts/create/{blogId}"
 @inherits CreateBase
 
+<TopShelf BackHref="@BackHref"></TopShelf>
+
 @if (BlogPost == null)
 {
     <LoadingIndicator></LoadingIndicator>
@@ -35,7 +37,7 @@ else
                     </InputSelect>
                 </div>
 
-                <button type="submit" class="btn btn-primary edit-btn mr-1">Submit</button>
+                <BlazeButton Type="submit" CssClasses="btn btn-primary edit-btn mr-1" Active="IsProcessing">Submit</BlazeButton>
             </EditForm>
 
         </div>
