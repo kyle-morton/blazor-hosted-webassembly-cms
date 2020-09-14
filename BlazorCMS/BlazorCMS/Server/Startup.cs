@@ -2,6 +2,7 @@ using BlazorCMS.Core.Data;
 using BlazorCMS.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,10 +28,15 @@ namespace BlazorCMS.Server
 
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IBlogPostService, BlogPostService>();
+
+            services.AddEntityFrameworkSqlite()
+                .AddDbContext<CMSDbContext>((serviceProvider, options) =>
+                        options.UseSqlite(Configuration["ConnectionStrings:CMS"])
+                               .UseInternalServiceProvider(serviceProvider));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CMSDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -57,8 +63,7 @@ namespace BlazorCMS.Server
                 endpoints.MapFallbackToFile("index.html");
             });
 
-            // initialize data
-            MockDataContext.Init();
+            CMSDbinitializer.Seed(context);
         }
     }
 }

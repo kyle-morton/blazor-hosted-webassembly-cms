@@ -9,22 +9,26 @@ namespace BlazorCMS.Core.Services
 
     public interface IBlogPostService
     {
-        List<BlogPost> GetPosts();
-        List<BlogPost> GetBlogPosts(int blogId);
-        BlogPost GetPost(int id);
-        BlogPost Create(BlogPost post);
-        BlogPost Update(BlogPost post);
-        void Delete(int id);
+        List<BlogPost> GetPostsAsync();
+        List<BlogPost> GetBlogPostsAsync(int blogId);
+        BlogPost GetPostAsync(int id);
+        BlogPost CreateAsync(BlogPost post);
+        BlogPost UpdateAsync(BlogPost post);
+        void DeleteAsync(int id);
     }
 
-    public class BlogPostService : IBlogPostService
+    public class BlogPostService : ServiceBase, IBlogPostService
     {
-
-        public List<BlogPost> GetPosts()
+        public BlogPostService(CMSDbContext context) : base(context)
         {
+        }
+
+        public List<BlogPost> GetPostsAsync()
+        {
+            var posts = _context.BlogPosts.ToList();
             return MockDataContext.BlogPosts;
         }
-        public List<BlogPost> GetBlogPosts(int blogId)
+        public List<BlogPost> GetBlogPostsAsync(int blogId)
         {
             var posts = MockDataContext.BlogPosts.Where(bp => bp.BlogId == blogId).ToList();
 
@@ -36,14 +40,14 @@ namespace BlazorCMS.Core.Services
             return posts;
         }
 
-        public BlogPost GetPost(int id)
+        public BlogPost GetPostAsync(int id)
         {
             var post = MockDataContext.BlogPosts.SingleOrDefault(bp => bp.Id == id);
             post.Blog = MockDataContext.Blogs.Single(b => b.Id == post.BlogId);
             return post;
         }
 
-        public BlogPost Create(BlogPost post)
+        public BlogPost CreateAsync(BlogPost post)
         {
             post.Id = MockDataContext.NewPostId;
             MockDataContext.BlogPosts.Add(post);
@@ -51,7 +55,7 @@ namespace BlazorCMS.Core.Services
             return post;
         }
 
-        public BlogPost Update(BlogPost post)
+        public BlogPost UpdateAsync(BlogPost post)
         {
             var postToUpdate = MockDataContext.BlogPosts.SingleOrDefault(bp => bp.Id == post.Id);
             if (postToUpdate == null)
@@ -66,7 +70,7 @@ namespace BlazorCMS.Core.Services
             return postToUpdate;
         }
 
-        public void Delete(int id)
+        public void DeleteAsync(int id)
         {
             MockDataContext.Delete(id, MockDataContext.MockDataType.BlogPost);
         }

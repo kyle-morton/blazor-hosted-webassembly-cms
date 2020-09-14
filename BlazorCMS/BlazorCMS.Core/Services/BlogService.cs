@@ -8,16 +8,20 @@ namespace BlazorCMS.Core.Services
 {
     public interface IBlogService
     {
-        List<Blog> GetBlogs();
-        Blog GetBlog(int id);
-        Blog Create(Blog blog);
-        Blog Update(Blog blog);
-        void Delete(int id);
+        List<Blog> GetBlogsAsync();
+        Blog GetBlogAsync(int id);
+        Blog CreateAsync(Blog blog);
+        Blog UpdateAsync(Blog blog);
+        void DeleteAsync(int id);
 
     }
-    public class BlogService : IBlogService
+    public class BlogService : ServiceBase, IBlogService
     {
-        public Blog Create(Blog blog)
+        public BlogService(CMSDbContext context) : base(context)
+        {
+        }
+
+        public Blog CreateAsync(Blog blog)
         {
             blog.Id = MockDataContext.NewBlogId;
             blog.CreateDate = blog.ModifyDate = DateTime.Now;
@@ -25,22 +29,22 @@ namespace BlazorCMS.Core.Services
             return blog;
         }
 
-        public void Delete(int id)
+        public void DeleteAsync(int id)
         {
             MockDataContext.Delete(id, MockDataContext.MockDataType.Blog);
         }
 
-        public Blog GetBlog(int id)
+        public Blog GetBlogAsync(int id)
         {
             return MockDataContext.Blogs.SingleOrDefault(b => b.Id == id);
         }
 
-        public List<Blog> GetBlogs()
+        public List<Blog> GetBlogsAsync()
         {
             return MockDataContext.Blogs;
         }
 
-        public Blog Update(Blog blog)
+        public Blog UpdateAsync(Blog blog)
         {
             var blogToUpdate = MockDataContext.Blogs.SingleOrDefault(b => b.Id == blog.Id);
             if (blogToUpdate == null)

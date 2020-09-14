@@ -25,7 +25,7 @@ namespace BlazorCMS.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Blog> results = _blogService.GetBlogs();
+            List<Blog> results = _blogService.GetBlogsAsync();
             return Ok(results.Select(BlogViewModel.From));
         }
 
@@ -33,7 +33,7 @@ namespace BlazorCMS.Server.Controllers
         [Route("{id}")]
         public IActionResult Details(int id)
         {
-            var result = _blogService.GetBlog(id);
+            var result = _blogService.GetBlogAsync(id);
             return Ok(BlogViewModel.From(result));
         }
 
@@ -46,7 +46,7 @@ namespace BlazorCMS.Server.Controllers
                 return BadRequest("Invalid model"); 
             }
 
-            var blog = _blogService.Create(vm.ToModel());
+            var blog = _blogService.CreateAsync(vm.ToModel());
             return Ok(BlogViewModel.From(blog));
         }
 
@@ -59,7 +59,7 @@ namespace BlazorCMS.Server.Controllers
                 return BadRequest("Invalid model"); 
             }
 
-            var blog = _blogService.Update(vm.ToModel());
+            var blog = _blogService.UpdateAsync(vm.ToModel());
             return Ok(BlogViewModel.From(blog));
         }
 
@@ -72,7 +72,7 @@ namespace BlazorCMS.Server.Controllers
                 return BadRequest("Id is required"); 
             }
 
-            _blogService.Delete(id);
+            _blogService.DeleteAsync(id);
             return Ok(); 
         }
     }

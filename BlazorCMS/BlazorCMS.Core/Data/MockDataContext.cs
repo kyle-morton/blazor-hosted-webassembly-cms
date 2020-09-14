@@ -9,8 +9,6 @@ namespace BlazorCMS.Core.Data
     {
         private static List<Blog> _blogs { get; set; }
         private static List<BlogPost> _blogPosts { get; set; }
-        private static List<User> _users { get; set; }
-        private static List<Person> _people { get; set; }
 
         public static List<Blog> Blogs
         {
@@ -38,8 +36,6 @@ namespace BlazorCMS.Core.Data
                 return blogPosts;
             }
         }
-        public static List<User> Users => _users;
-        public static List<Person> People => _people;
 
         public static int NewBlogId => _blogs.Count > 0 ? _blogs.Max(b => b.Id) + 1 : 1;
         public static int NewPostId => _blogPosts.Count > 0 ? _blogPosts.Max(bp => bp.Id) + 1 : 1;
@@ -110,38 +106,6 @@ namespace BlazorCMS.Core.Data
                 }
             };
 
-            _users = new List<User>
-            {
-                new User
-                {
-                    Id = 1,
-                    CreateDate = DateTime.Now.AddDays(-9),
-                    ModifyDate = DateTime.Now,
-                    Email = "mkmorton@gmail.test.com",
-                    Username = "mkmorton"
-                },
-                new User
-                {
-                    Id = 2,
-                    CreateDate = DateTime.Now.AddDays(-9),
-                    ModifyDate = DateTime.Now,
-                    Email = "mkmorton2@gmail.test.com",
-                    Username = "mkmorton2"
-                }
-            };
-
-            _people = new List<Person>
-            {
-                new Person
-                {
-                    Id = 1,
-                    CreateDate = DateTime.Now,
-                    ModifyDate = DateTime.Now,
-                    FirstName = "Kyle",
-                    LastName = "Morton",
-                    PhotoUrl = "https://ui-avatars.com/api/?name=Kyle+Morton"
-                }
-            };
         }
 
         public static void Delete(int id, MockDataType type)
@@ -155,21 +119,13 @@ namespace BlazorCMS.Core.Data
                 case MockDataType.BlogPost:
                     _blogPosts = _blogPosts.Where(b => b.Id != id).ToList();
                     break;
-                case MockDataType.User:
-                    _users = _users.Where(b => b.Id != id).ToList();
-                    break;
-                case MockDataType.Person:
-                    _people = _people.Where(b => b.Id != id).ToList();
-                    break;
             }
         }
 
         public enum MockDataType
         {
             Blog, 
-            BlogPost,
-            User,
-            Person
+            BlogPost
         }
     }
 }
